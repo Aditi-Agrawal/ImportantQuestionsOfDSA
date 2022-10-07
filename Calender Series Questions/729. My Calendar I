@@ -1,0 +1,33 @@
+Link - https://www.youtube.com/watch?v=qlmd5NXS-nY
+class MyCalendar {
+
+    private TreeMap<Integer,Integer> bookings;
+
+    public MyCalendar() {
+        bookings = new TreeMap<>();
+    }
+    
+    public boolean book(int start, int end) {
+        //start time of the booking just previous to my current booking
+        Integer prevBooking = bookings.floorKey(start);
+
+        //start time of the booking just next to my current booking
+        Integer nextBooking  = bookings.ceilingKey(start);
+
+        //check whether there is any intersection of the current booking with th previous and the next booking
+
+        //prevBooking.end <= currStart && curEnd <= nextBooking.start
+         if((prevBooking == null || bookings.get(prevBooking)<=start) && (nextBooking == null || nextBooking>=end)){
+             bookings.put(start,end);
+             return true;
+         }
+         return false;
+    }
+}
+
+
+/**
+ * Your MyCalendar object will be instantiated and called as such:
+ * MyCalendar obj = new MyCalendar();
+ * boolean param_1 = obj.book(start,end);
+ */
